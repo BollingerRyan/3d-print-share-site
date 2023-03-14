@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project page</title>
+</head>
+<body>
+    <div id="header">
+        <a href="">Profile</a>|
+        <a href="">Depot</a>|
+        <a href="">Logout</a>
+    </div>
+    <div id="show_projects">
+        <table>
+            ((SHOW ALL OF THE USERS PROJECTS HERE))
+        </table>
+    </div>
+    <div id="create_project_form">
+        <form action="create_project">
+            <label for="projects_name">Projects Name:</label>
+            <input type="text" name="projects_name">
+
+            <textarea name="description" id="" cols="30" rows="10" placeholder="breif description of the project here"></textarea>
+            <textarea name="instruction" id="" cols="30" rows="10" placeholder="any specific instructions to setup the print can be here"></textarea>
+            <p>please convert files to a .stl format</p>
+            <label for="upload">Upload files</label>
+            <input type="file" accept=".stl">
+
+            <input type="submit" name="submit" id="">
+        </form>
+    </div>
+</body>
+</html>

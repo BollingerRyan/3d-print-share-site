@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users page!</title>
+</head>
+<body>
+    <div id="container"><div id="header">
+        <h1>Welcome ((DISPLAY USERS NAME HERE))</h1>
+            <div>
+                <a href="">logout</a>
+                <a href="">view creations</a>
+            </div>
+            <hr>
+        </div>
+        <div id="body">
+            <table id="users_files">
+                <tr>
+                    <th>Name of part:</th>
+                    <th>Description:</th>
+                    <th>Number of downloads:</th>
+                    <th>View Files:</th>
+                    <th>Actions:</th>
+                </tr>
+                <tr>
+                    ((for loop will iterate through users own files here))
+                </tr>
+            </table>
+            <a href="">create new project</a>
+            <a href="">edit existing project</a>
+            <form action=""><h4>Upload single files here</h4>
+                <label for="name">Name of part:</label>
+                <input type="text" name="name">
+
+                <label for="description">Description:</label>
+                <textarea name="description" rows="10" cols="40">Write something here</textarea>
+
+                <label for="part_files">Part Files:</label>
+                <input type="file"name="part_files" accept=".stl">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

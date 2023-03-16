@@ -23,7 +23,7 @@ def log_user_in():
 @app.route('/register', methods=["post"])
 def Reg_new_user():
     if not User.validations(request.form):
-        return redirect ('/')
+        return redirect ('/register')
     data = {
         "username" : request.form['username'],
         'email' : request.form['email'],
@@ -32,8 +32,3 @@ def Reg_new_user():
     user_id = User.Reg_user(data)
     session['id'] = user_id
     return redirect('/profile_page')
-
-@app.route('/profile_page')
-def show_profile_page():
-    if User.id in session == True:
-        return render_template('/profile_pgae.html')

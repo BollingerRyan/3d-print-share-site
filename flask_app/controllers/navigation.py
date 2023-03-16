@@ -17,10 +17,10 @@ def show_register_page():
 
 @app.route('/profile_page')
 def show_profile_page():
-    if user.id in session == True:
+    if User.id in session == True:
         return render_template('/profile_pgae.html')
     
 @app.route('/create_project')
 def show_create_project_page():
-    if user.id in session == True:
+    if User.id in session == True:
         return render_template('/create_project.html')

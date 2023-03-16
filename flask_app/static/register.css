@@ -1,11 +1,11 @@
-#container{
-    justify-content: center;
+#regbox{
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 250px;
+    margin: 150px;
     border: 4px dotted black;
 }
+
 body {
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;

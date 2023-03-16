@@ -21,9 +21,9 @@ class User:
     def Reg_user(cls,data):
         query = '''
         INSERT INTO users
-        ( first_name, last_name, password,
+        ( username, password,
         email, created_at, updated_at )
-        VALUES ( %(first_name)s, %(last_name)s,
+        VALUES ( %(username)s,
         %(email)s, %(password)s,  NOW(), NOW() );
         '''
         return connectToMySQL(db).query_db( query, data )
@@ -39,12 +39,6 @@ class User:
         results = connectToMySQL(db).query_db( query, data)
         if len(data['password']) < 2:
             flash('Password must have a minimum of 8 characters, use a at least one number one letter and one specaial character')
-            is_valid = False
-        if len(data['first_name']) < 2:
-            flash("first name must be at least 2 characters","register")
-            is_valid = False
-        if len(data['last_name']) < 2:
-            flash("Last name must be at least 2 characters","register")
             is_valid = False
         if len(results) >= 1:
             flash("Email already taken","register")

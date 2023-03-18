@@ -8,9 +8,9 @@
 </head>
 <body>
     <div id="container"><div id="header">
-        <h1>Welcome ((DISPLAY USERS NAME HERE))</h1>
+        <h1>Welcome {{user.username}}</h1>
             <div>
-                <a href="">logout</a>
+                <a href="/logout">logout</a>
                 <a href="">view creations</a>
             </div>
             <hr>
@@ -28,7 +28,7 @@
                     ((for loop will iterate through users own files here))
                 </tr>
             </table>
-            <a href="">create new project</a>
+            <a href="/create_project">create new project</a> |
             <a href="">edit existing project</a>
             <form action=""><h4>Upload single files here</h4>
                 <label for="name">Name of part:</label>

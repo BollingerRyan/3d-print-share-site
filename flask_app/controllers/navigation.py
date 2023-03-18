@@ -17,10 +17,20 @@ def show_register_page():
 
 @app.route('/profile_page')
 def show_profile_page():
-    if 'id' in session == True:
-        return render_template('/profile_page.html')
+    if 'id' not in session:
+        return redirect ('/')
+    else:
+        one_user = User.get_one_user({'id':session['id']})
+        return render_template('/profile_page.html', user = one_user)
     
 @app.route('/create_project')
 def show_create_project_page():
     if 'id' not in session:
+        return redirect ('/')
+    else:
         return render_template('/create_project.html')
+    
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')

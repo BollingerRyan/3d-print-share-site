@@ -1,6 +1,6 @@
-import re
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 PASS_REGEX = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
@@ -24,10 +24,29 @@ class User:
         ( username, password,
         email, created_at, updated_at )
         VALUES ( %(username)s,
-        %(email)s, %(password)s,  NOW(), NOW() );
+        %(password)s, %(email)s,  NOW(), NOW() );
         '''
         return connectToMySQL(db).query_db( query, data )
     
+    @classmethod
+    def get_by_email(cls,data):
+        query = '''
+        SELECT * FROM users WHERE email = %(email)s;
+        '''
+        results = connectToMySQL(db).query_db(query,data)
+        if len(results) < 1:
+            return False
+        return cls(results[0])
+
+    @classmethod
+    def get_one_user(cls,id):
+        query = '''
+        SELECT * FROM users 
+        WHERE id = %(id)s
+                '''
+        results = connectToMySQL(db).query_db(query, id)
+        one_user = cls(results[0])
+        return one_user
 
     @staticmethod
     def validations(data):

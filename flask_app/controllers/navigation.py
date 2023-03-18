@@ -30,6 +30,13 @@ def show_create_project_page():
     else:
         return render_template('/create_project.html')
     
+@app.route('/edit_profile')
+def show_edit_profile_page():
+    if 'id' not in session:
+        return redirect ('/')
+    else:
+        return render_template('/edit_profile.html')
+    
 @app.route('/logout')
 def logout():
     session.clear()

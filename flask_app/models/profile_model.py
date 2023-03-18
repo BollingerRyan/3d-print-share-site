@@ -10,3 +10,4 @@ class Profile:
         self.description = data ['description']
         self.created_at = data ['created_at']
         self.updated_at = data ['updated_at']
+        self.users_id = []

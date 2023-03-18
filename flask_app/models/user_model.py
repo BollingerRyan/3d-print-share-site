@@ -15,7 +15,6 @@ class User:
         self.email = data['email']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.profile = []
 
     @classmethod
     def Reg_user(cls,data):

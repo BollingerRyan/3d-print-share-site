@@ -19,15 +19,16 @@
         </div>
         <div id="profile_info">
             <div>
-                <img src="" alt="no picture to display">
-                (users first and last name)
-                (lv and rank)
-                (users bio)
+                {% if profile.Pic %}
+                    <img id="profilepic" src="{{ profile.pic }}" alt="profile picture">
+                {% else %}
+                    <img id="deafaultpic" src="static/images/deafult_profile_pic.png" alt="default profile picture">
+                {% endif %}
+                <h2>{{ profile.Full_name }}</h2>
+                <p>{{ profile.description }}</p>
                 <a href="/edit_profile">Edit Profile</a>
             </div>
-            
-
-        </div>
+        </div>>
         <div id="">
             <table id="users_files">
                 <tr>

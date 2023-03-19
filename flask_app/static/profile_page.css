@@ -8,3 +8,11 @@ body{
     justify-content: center;
     margin: 150px;
 }
+
+#deafaultpic {
+    height: 75px;
+}
+
+#profilepic {
+    height: 75px;
+}

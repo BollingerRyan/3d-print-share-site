@@ -31,4 +31,4 @@ def Reg_new_user():
     }
     user_id = User.Reg_user(data)
     session['id'] = user_id
-    return redirect('/profile_page')
+    return redirect('/create_profile')

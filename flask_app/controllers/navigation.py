@@ -21,8 +21,9 @@ def show_profile_page():
     if 'id' not in session:
         return redirect ('/')
     else:
-        profile = Profile.get_users_profile({'id':session['id']})
+        profile = Profile.get_users_profile({'user_id': session['id']})
         user = User.get_one_user({'id':session['id']})
+        print(profile)
         return render_template('/profile_page.html', user=user, profile=profile)
     
 @app.route('/create_project')

@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-import base64
-from werkzeug.utils import secure_filename
+from flask import session
+
 
 db = '3d_prints_db'
 
@@ -8,6 +8,7 @@ class Profile:
     def __init__(self,data):
         self.id = data ['id']
         self.Full_name = data ['Full_name']
+        self.Pic = data['Pic']
         self.description = data ['description']
         self.created_at = data ['created_at']
         self.updated_at = data ['updated_at']
@@ -25,10 +26,15 @@ class Profile:
 
     
     @classmethod
-    def get_users_profile(cls,id):
+    def get_users_profile(cls, user_id):
         query = '''
         SELECT * FROM profile
-        WHERE users_id = %(id)s
+        WHERE users_id = %(user_id)s
         '''
-        results = connectToMySQL(db).query_db(query, id)
-        return results
+        results = connectToMySQL(db).query_db(query, user_id)
+        print(f"results: {results}")
+        if results:
+            return cls(results[0])
+        else:
+            return None
+

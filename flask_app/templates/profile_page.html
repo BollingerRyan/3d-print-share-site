@@ -20,15 +20,15 @@
         <div id="profile_info">
             <div>
                 {% if profile.Pic %}
-                    <img id="profilepic" src="{{ profile.pic }}" alt="profile picture">
+                    <img id="profilepic" src="static/uploads/{{profile.Pic.decode('utf8')}}" alt="Profile picture">
                 {% else %}
-                    <img id="deafaultpic" src="static/images/deafult_profile_pic.png" alt="default profile picture">
+                    <img id="defaultpic" src="static/images/deafult_profile_pic.png" alt="default profile picture">
                 {% endif %}
                 <h2>{{ profile.Full_name }}</h2>
                 <p>{{ profile.description }}</p>
-                <a href="/edit_profile">Edit Profile</a>
+                <a href="/create_profile">Edit Profile</a>
             </div>
-        </div>>
+        </div>
         <div id="">
             <table id="users_files">
                 <tr>

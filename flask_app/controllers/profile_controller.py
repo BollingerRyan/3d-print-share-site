@@ -1,6 +1,6 @@
 import os
 from flask_app import app
-from flask import Flask, redirect, request, session
+from flask import Flask, redirect, request, session,flash
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 from flask_app.models.user_model import User
@@ -12,12 +12,14 @@ app.config['UPLOAD_FOLDER'] = 'flask_app/static/uploads/profile_pics/'
 
 @app.route('/create_profile', methods=["POST"])
 def create_users_profile():
+    if not Profile.validations(request.form):
+        return redirect('/update_profile')
     file = request.files['Pic']
     filename = secure_filename(file.filename)
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    print("file_path:", file_path)
     if not os.path.exists(file_path):
-        print("File does not exist!")   
+        flash("File does not exist!","profile")
+        return redirect('/create_profile')   
     file.save(file_path)
     data = {
         'users_id': session['id'],
@@ -32,12 +34,14 @@ def create_users_profile():
 
 @app.route('/update_profile', methods=["POST"])
 def update_users_profile():
+    if not Profile.validations(request.form):
+        return redirect('/update_profile')
     file = request.files['Pic']
     filename = secure_filename(file.filename)
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    print("file_path:", file_path)
     if not os.path.exists(file_path):
-        print("File does not exist!")
+        flash("File does not exist!","profile")
+        return redirect('/update_profile')   
     file.save(file_path)
     data = {
         'users_id': session['id'],
@@ -51,6 +55,8 @@ def update_users_profile():
 @app.route('/uploads/profile_pics/<filename>')
 def serve_profile_pic(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+
 
 
 

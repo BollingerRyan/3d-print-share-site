@@ -13,10 +13,17 @@
         | <a href="/profile_page">Profile</a> 
         | <a href="/depot">Depot</a>
     </div>
+
     <div id="editprofile">
         <form action="/update_profile" method="post" enctype="multipart/form-data">
             <h1>Edit Profile</h1>
-
+            {% with messages = get_flashed_messages(category_filter=['profile']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: rgb(255, 0, 0);">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <label for="Pic">Upload a profile picture</label>
             <input type="file" name="Pic" accept=".jpg">
 

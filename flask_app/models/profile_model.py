@@ -1,4 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask import flash, request
 
 
 
@@ -41,4 +42,16 @@ class Profile:
     def update_users_profile(cls, user_data):
         query = "UPDATE profile SET Full_name = %(Full_name)s, description = %(description)s, Pic = %(Pic)s, updated_at = NOW() WHERE users_id = %(users_id)s;"
         return connectToMySQL(db).query_db(query, user_data)
+    
+
+    @staticmethod
+    def validations(data):
+        is_valid = True
+        if len(data['Full_name']) < 2:
+            flash('Full name must be a minimum of 2 characters',"profile")
+            is_valid = False
+        if len(data['description']) < 2:
+            flash('Description feild must have at least 2 characters',"profile")
+            is_valid = False
+        return is_valid
 

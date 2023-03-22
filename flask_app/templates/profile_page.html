@@ -20,13 +20,15 @@
         <div id="profile_info">
             <div>
                 {% if profile.Pic %}
-                    <img id="profilepic" src="static/uploads/{{profile.Pic.decode('utf8')}}" alt="Profile picture">
+                    <img id ="profilepic"src="{{ url_for('static', filename=profile.Pic) }}" alt="profile pic cant be displayed">
                 {% else %}
                     <img id="defaultpic" src="static/images/deafult_profile_pic.png" alt="default profile picture">
                 {% endif %}
                 <h2>{{ profile.Full_name }}</h2>
                 <p>{{ profile.description }}</p>
-                <a href="/create_profile">Edit Profile</a>
+                ((Rank))
+                <br>
+                <a href="/update_profile">Edit Profile</a>
             </div>
         </div>
         <div id="">

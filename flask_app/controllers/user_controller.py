@@ -13,10 +13,10 @@ def log_user_in():
     user_in_db = User.get_by_email(data)
     if not user_in_db:
         flash("Email or Password is incorrect","login")
-        return redirect('/')
+        return redirect('/login')
     if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
         flash("Email or Password is incorrect","login")
-        return redirect('/')
+        return redirect('/login')
     session['id'] = user_in_db.id
     return redirect('/profile_page')
 

@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import session
+
 
 
 db = '3d_prints_db'
@@ -12,7 +12,6 @@ class Profile:
         self.description = data ['description']
         self.created_at = data ['created_at']
         self.updated_at = data ['updated_at']
-        self.users_id = []
 
 
     @classmethod
@@ -37,4 +36,9 @@ class Profile:
             return cls(results[0])
         else:
             return None
+        
+    @classmethod
+    def update_users_profile(cls, user_data):
+        query = "UPDATE profile SET Full_name = %(Full_name)s, description = %(description)s, Pic = %(Pic)s, updated_at = NOW() WHERE users_id = %(users_id)s;"
+        return connectToMySQL(db).query_db(query, user_data)
 

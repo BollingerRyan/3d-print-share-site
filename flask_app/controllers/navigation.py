@@ -1,6 +1,7 @@
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.user_model import User
 from flask_app.models.profile_model import Profile
+from flask_app.models.project_model import Project
 from flask_app import app
 
 
@@ -32,6 +33,14 @@ def show_create_project_page():
     else:
         return render_template('/create_project.html')
     
+@app.route('/edit_project')
+def show_edit_projects_page():
+    if 'id' not in session:
+        return redirect ('/')
+    else:
+        project = Project.get_project_by_users_id({'users_id':session['id']})
+        return render_template('/edit_project.html',project = project)
+    
 @app.route('/create_profile')
 def show_edit_profile_page():
     if 'id' not in session:
@@ -47,6 +56,12 @@ def show_update_profile_page():
         profile = Profile.get_users_profile({'user_id': session['id']})
         return render_template('/edit_profile.html', profile = profile)
     
+@app.route('/upload_part')
+def upload_part():
+    if 'id' not in session:
+        return redirect ('/')
+    else:
+        part = 
 @app.route('/logout')
 def logout():
     session.clear()

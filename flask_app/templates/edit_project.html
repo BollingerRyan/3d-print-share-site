@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Project</title>
+</head>
+<body>
+    {{project.project_name}}
+    (SUCCSESS)
+    This page will allow the user to upload parts to their project!
+    <form action="/upload_part" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="project_id" value="{{ project.id }}">
+        <label for="part_name">Part Name:</label>
+        <input type="text" name="part_name" id="part_name" required>
+        <label for="part_file">Part File:</label>
+        <input type="file" name="part_file" id="part_file" accept=".stl" required>
+        <input type="submit" value="Upload Part">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Part Name</th>
+                <th>File Name</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for part in parts %}
+            <tr>
+                <td>{{ part.part_name }}</td>
+                <td>{{ part.file_name }}</td>
+                <td><a href="/Delete{{ part.id }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>

@@ -9,7 +9,8 @@
     <title>Users page!</title>
 </head>
 <body>
-    <div id="container"><div id="header">
+    <div id="container">
+        <div id="header">
         <h1>Welcome {{user.username}}</h1>
             <div>
                 <a href="/logout">logout</a> |
@@ -20,9 +21,9 @@
         <div id="profile_info">
             <div>
                 {% if profile.Pic %}
-                    <img id ="profilepic"src="{{ url_for('static', filename=profile.Pic) }}" alt="profile pic cant be displayed">
+                    <img class ="profilepic"src="{{ url_for('static', filename=profile.Pic) }}" alt="profile pic cant be displayed">
                 {% else %}
-                    <img id="defaultpic" src="static/images/deafult_profile_pic.png" alt="default profile picture">
+                    <img class="profilepic" src="static/images/deafult_profile_pic.png" alt="default profile picture">
                 {% endif %}
                 <h2>{{ profile.Full_name }}</h2>
                 <p>{{ profile.description }}</p>

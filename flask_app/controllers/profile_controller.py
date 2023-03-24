@@ -13,43 +13,58 @@ app.config['UPLOAD_FOLDER'] = 'flask_app/static/uploads/profile_pics/'
 @app.route('/create_profile', methods=["POST"])
 def create_users_profile():
     if not Profile.validations(request.form):
-        return redirect('/update_profile')
-    file = request.files['Pic']
-    filename = secure_filename(file.filename)
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    if not os.path.exists(file_path):
-        flash("File does not exist!","profile")
-        return redirect('/create_profile')   
-    file.save(file_path)
-    data = {
-        'users_id': session['id'],
-        'Full_name': request.form['Full_name'],
-        'Pic': f'uploads/profile_pics/{filename}',
-        'description': request.form['description']
-    }
-    Profile.create_profile(data)
-    print("create_users_profile finished!")
+        return redirect('/create_profile')
+    if request.files['Pic'].filename == '':
+        data = {
+            'users_id': session['id'],
+            'Full_name': request.form['Full_name'],
+            'Pic' : None,
+            'description': request.form['description']
+        }
+        Profile.create_profile(data)
+    else:
+        if 'Pic' in request.files:
+            file = request.files['Pic']
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+            data = {
+                'users_id': session['id'],
+                'Full_name': request.form['Full_name'],
+                'Pic': f'uploads/profile_pics/{filename}',
+                'description': request.form['description']
+            }
+        Profile.create_profile(data)
+        print("create_users_profile finished!")
+        Profile.update_users_profile(data)
     return redirect('/profile_page')
 
 
 @app.route('/update_profile', methods=["POST"])
 def update_users_profile():
+    print(request.files['Pic'])
     if not Profile.validations(request.form):
         return redirect('/update_profile')
-    file = request.files['Pic']
-    filename = secure_filename(file.filename)
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    if not os.path.exists(file_path):
-        flash("File does not exist!","profile")
-        return redirect('/update_profile')   
-    file.save(file_path)
-    data = {
-        'users_id': session['id'],
-        'Full_name': request.form['Full_name'],
-        'Pic': f'uploads/profile_pics/{filename}',
-        'description': request.form['description']
-    }
-    Profile.update_users_profile(data)
+    if request.files['Pic'].filename == '':
+        data = {
+            'users_id': session['id'],
+            'Full_name': request.form['Full_name'],
+            'Pic' : None,
+            'description': request.form['description']
+        }
+        Profile.update_users_profile(data)
+    else:
+        file = request.files['Pic']
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        data = {
+            'users_id': session['id'],
+            'Full_name': request.form['Full_name'],
+            'Pic': f'uploads/profile_pics/{filename}',
+            'description': request.form['description']
+        }
+        Profile.update_users_profile(data)
     return redirect('/profile_page')
 
 @app.route('/uploads/profile_pics/<filename>')

@@ -2,8 +2,6 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash, request
 from flask_app import app
 
-
-
 db = '3d_prints_db'
 
 class Profile:

@@ -7,16 +7,21 @@
     <title>Edit Project</title>
 </head>
 <body>
+    <div id="head">
+        <a href="/projects">Projects</a>
+        | <a href="/profile_page">Profile</a> 
+        | <a href="/depot">Depot</a>
+        <hr>
+    </div>
     {{project.project_name}}
-    (SUCCSESS)
     This page will allow the user to upload parts to their project!
-    <form action="/upload_part" method="POST" enctype="multipart/form-data">
+    <form action="/Upload_part" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="project_id" value="{{ project.id }}">
         <label for="part_name">Part Name:</label>
         <input type="text" name="part_name" id="part_name" required>
-        <label for="part_file">Part File:</label>
-        <input type="file" name="part_file" id="part_file" accept=".stl" required>
-        <input type="submit" value="Upload Part">
+        <label for="part">Part File:</label>
+        <input type="file" name="part" id="part_file" accept=".stl" required>
+        <input type="submit" value="submit">
     </form>
     <table>
         <thead>
@@ -30,7 +35,7 @@
             {% for part in parts %}
             <tr>
                 <td>{{ part.part_name }}</td>
-                <td>{{ part.file_name }}</td>
+                <td>{{ part.part }}</td>
                 <td><a href="/Delete{{ part.id }}">Delete</a></td>
             </tr>
             {% endfor %}

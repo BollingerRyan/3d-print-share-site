@@ -1,6 +1,6 @@
 import os
 from flask_app import app
-from flask import Flask, redirect, request, session,flash
+from flask import Flask, redirect, request, session
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 from flask_app.models.user_model import User

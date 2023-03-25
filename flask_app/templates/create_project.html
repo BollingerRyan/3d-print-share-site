@@ -18,6 +18,13 @@
         </table>
     </div>
     <div id="create_project" >
+        {% with messages = get_flashed_messages(category_filter=['project']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: rgb(255, 0, 0);">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         <form action="/create_project" method="POST">
             <label for="project_name">Projects Name:</label>
             <input type="text" name="project_name">

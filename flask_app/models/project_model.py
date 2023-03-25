@@ -1,4 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask import flash
+
 
 db = '3d_prints_db'
 
@@ -31,3 +33,14 @@ class Project:
             return cls(results[0])
         else:
             return None
+
+    @staticmethod
+    def validations(data):
+        is_valid = True
+        if len(data['project_name']) < 2:
+            flash('project name must be a minimum of 2 characters',"project")
+            is_valid = False
+        if len(data['description']) < 2:
+            flash('Description feild must have at least 2 characters',"project")
+            is_valid = False
+        return is_valid

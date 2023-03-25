@@ -1,4 +1,6 @@
 from flask_app import app
+from flask_app.controllers import part_controller
+from flask_app.models import part_model
 from flask_app.controllers import project_controller
 from flask_app.models import project_model
 from flask_app.controllers import navigation

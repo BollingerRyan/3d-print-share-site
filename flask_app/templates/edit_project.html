@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='edit_profile.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Project</title>
 </head>
 <body>
     <div id="head">
         <a href="/projects">Projects</a>
-        | <a href="/profile_page">Profile</a> 
-        | <a href="/depot">Depot</a>
+        <a href="/profile_page">Profile</a> 
+        <a href="/depot">Depot</a>
         <hr>
     </div>
     {% with messages = get_flashed_messages(category_filter=['part']) %}
@@ -20,8 +22,8 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-    <p>{{project.project_name}}</p>
-    <p>{{project.id}}</p>
+    <H1>{{project.project_name}}</H1>
+    <p>Project id #{{project.id}}</p>
     This page will allow the user to upload parts to their project!
     <form method="post" enctype="multipart/form-data" action="/Upload_part/{{project.id}}">
         <label for="part_name">Part Name:</label>
@@ -31,12 +33,12 @@
         <input type="hidden" name="project_id" value="{{project.id}}">
         <input type="submit" value="submit">
     </form>
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Part Name</th>
-                <th>File Name</th>
-                <th>action</th>
+                <th scope="col">Part Name</th>
+                <th scope="col">File Name</th>
+                <th scope="col">action</th>
             </tr>
         </thead>
         <tbody>

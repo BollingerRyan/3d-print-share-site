@@ -21,7 +21,15 @@ class Part:
         result = connectToMySQL(db).query_db(query, data)
         data['id'] = result
         return result
-
+    
+    @classmethod
+    def get_one_part(cls, data):
+        query = "SELECT * FROM parts WHERE id = %(id)s;"
+        results = connectToMySQL(db).query_db(query, data)
+        if len(results) < 1:
+            return False
+        return cls(results[0])
+    
     @classmethod
     def get_parts_by_project_id(cls, project_id):
         query = '''SELECT * FROM parts WHERE project_id = %(project_id)s'''
@@ -30,3 +38,10 @@ class Part:
         for part in results:
             parts.append(cls(part))
         return parts
+    
+    @classmethod
+    def delete_part(cls, part_id):
+        query = '''
+        DELETE FROM parts WHERE id = %(part_id)s
+        '''
+        return connectToMySQL(db).query_db(query, {'part_id': part_id})

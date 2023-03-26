@@ -14,7 +14,7 @@
         <h1>Welcome {{user.username}}</h1>
             <div>
                 <a href="/logout">logout</a> |
-                <a href="">view creations</a>
+                <a href="/depot">Depot</a>
             </div>
             <hr>
         </div>
@@ -27,26 +27,36 @@
                 {% endif %}
                 <h2>{{ profile.Full_name }}</h2>
                 <p>{{ profile.description }}</p>
-                ((Rank))
                 <br>
                 <a href="/update_profile">Edit Profile</a>
             </div>
         </div>
         <div id="">
             <table id="users_files">
+            {% with messages = get_flashed_messages(category_filter=['project']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                            <p style="color: rgb(255, 0, 0);">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 <tr>
-                    <th>Name of part:</th>
+                    <th>Project Name:</th>
                     <th>Description:</th>
-                    <th>Number of downloads:</th>
-                    <th>View Files:</th>
                     <th>Actions:</th>
                 </tr>
+                {% for projects in project %}
                 <tr>
-                    <td>((for loop will iterate through users own files here))</td>
+                    <td>{{ projects.project_name }}</td>
+                    <td>{{ projects.description }}</td>
+                    <td>
+                        <a href="/edit_project/{{projects.id}}">Edit</a> |
+                        <a href="/delete_project/{{projects.id}}">Delete</a>
+                    </td>
                 </tr>
+                {% endfor %}
             </table>
-            <a href="/create_project">create new project</a> |
-            <a href="">edit existing project</a>
+            <a href="/create_project">create new project</a>
         </div>
     </div>
 </body>

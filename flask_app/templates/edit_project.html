@@ -13,14 +13,22 @@
         | <a href="/depot">Depot</a>
         <hr>
     </div>
-    {{project.project_name}}
+    {% with messages = get_flashed_messages(category_filter=['part']) %}
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: rgb(255, 0, 0);">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    <p>{{project.project_name}}</p>
+    <p>{{project.id}}</p>
     This page will allow the user to upload parts to their project!
-    <form action="/Upload_part" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="project_id" value="{{ project.id }}">
+    <form method="post" enctype="multipart/form-data" action="/Upload_part/{{project.id}}">
         <label for="part_name">Part Name:</label>
         <input type="text" name="part_name" id="part_name" required>
         <label for="part">Part File:</label>
         <input type="file" name="part" id="part_file" accept=".stl" required>
+        <input type="hidden" name="project_id" value="{{project.id}}">
         <input type="submit" value="submit">
     </form>
     <table>
@@ -36,7 +44,7 @@
             <tr>
                 <td>{{ part.part_name }}</td>
                 <td>{{ part.part }}</td>
-                <td><a href="/Delete{{ part.id }}">Delete</a></td>
+                <td><a href="/delete_part/{{part.id}}">Delete</a></td>
             </tr>
             {% endfor %}
         </tbody>

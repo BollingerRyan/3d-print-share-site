@@ -12,12 +12,8 @@
         <a href="">Depot</a>|
         <a href="/logout">Logout</a>
     </div>
-    <div id="show_projects">
-        <table>
-            ((SHOW ALL OF THE USERS PROJECTS HERE))
-        </table>
-    </div>
     <div id="create_project" >
+        <p>Please give the project a name and a short description we will add parts into it next!</p>
         {% with messages = get_flashed_messages(category_filter=['project']) %}
                 {% if messages %}
                     {% for message in messages %}

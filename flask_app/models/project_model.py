@@ -26,13 +26,45 @@ class Project:
     
     @classmethod
     def get_project_by_users_id(cls, user_id):
-        query = '''SELECT * FROM projects WHERE users_id = %(users_id)s'''
+        query = '''SELECT * FROM projects WHERE users_id = %(user_id)s'''
         results = connectToMySQL(db).query_db(query, user_id)
-        print(f"results: {results}")
-        if results:
-            return cls(results[0])
-        else:
-            return None
+        projects = []
+        for result in results:
+            projects.append(cls(result))
+        return projects
+
+    @classmethod
+    def get_project_by_id(cls, id):
+        query = "SELECT * FROM projects WHERE id = %(id)s;"
+        result = connectToMySQL(db).query_db(query, id)
+        if len(result) < 1:
+            return False
+        return cls(result[0])
+    
+    @classmethod
+    def get_project_by_part_project_id(cls, id):
+        query = "SELECT * FROM projects WHERE id = %(id)s;"
+        result = connectToMySQL(db).query_db(query, id)
+        if len(result) < 1:
+            return False
+        return cls(result[0])
+    
+    @classmethod
+    def get_users_and_projects(cls):
+        query = '''
+        SELECT * FROM users
+        LEFT JOIN projects
+        ON users.id = projects.users_id
+        ORDER BY projects.created_at DESC;
+        '''
+        return connectToMySQL(db).query_db(query)
+
+    @classmethod
+    def delete_project(cls, project_id):
+        query = "DELETE FROM parts WHERE project_id = %(project_id)s;"
+        connectToMySQL(db).query_db(query, project_id)
+        query = "DELETE FROM projects WHERE id = %(project_id)s;"
+        return connectToMySQL(db).query_db(query, project_id)
 
     @staticmethod
     def validations(data):

@@ -7,7 +7,7 @@ from flask_app.models.user_model import User
 from flask_app.models.profile_model import Profile
 
 
-app.config['UPLOAD_FOLDER'] = 'flask_app/static/uploads/profile_pics/'
+app.config['UPLOAD_FOLDER'] = 'flask_app/static/uploads/'
 
 
 @app.route('/create_profile', methods=["POST"])
@@ -31,7 +31,7 @@ def create_users_profile():
             data = {
                 'users_id': session['id'],
                 'Full_name': request.form['Full_name'],
-                'Pic': f'uploads/profile_pics/{filename}',
+                'Pic': f'uploads/{filename}',
                 'description': request.form['description']
             }
         Profile.create_profile(data)
@@ -61,13 +61,13 @@ def update_users_profile():
         data = {
             'users_id': session['id'],
             'Full_name': request.form['Full_name'],
-            'Pic': f'uploads/profile_pics/{filename}',
+            'Pic': f'uploads/{filename}',
             'description': request.form['description']
         }
         Profile.update_users_profile(data)
     return redirect('/profile_page')
 
-@app.route('/uploads/profile_pics/<filename>')
+@app.route('/uploads/<filename>')
 def serve_profile_pic(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 

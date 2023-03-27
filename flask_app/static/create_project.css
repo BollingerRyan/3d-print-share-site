@@ -16,7 +16,9 @@ body {
     height: 50px;
     padding: 0 20px;
 }
-
+.username{
+    margin-right: auto;
+}
 #header a {
     color: #fff;
     font-size: 16px;
@@ -28,18 +30,7 @@ body {
 #header a:hover {
     color: #ffd700;
 }
-a {
-    color: #333;
-    text-decoration: none;
-}
 
-a:hover {
-    text-decoration: underline;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-}
 
 p {
     margin: 0 0 1rem 0;
@@ -70,13 +61,6 @@ input[type="submit"]:hover {
 }
 
 /* Layout styles */
-
-#header {
-    background-color: #f0f0f0;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-}
 
 #create_project {
     max-width: 600px;

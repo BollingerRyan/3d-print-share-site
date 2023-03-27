@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f5f5f5;
 }
 
 #header {
@@ -25,7 +26,9 @@ body {
 #header a:hover {
     color: #ffd700;
 }
-
+.username {
+    margin-right: auto;
+}
 #searchBOX {
     background-color: #f5f5f5;
     padding: 50px 20px;

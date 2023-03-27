@@ -33,18 +33,19 @@ def show_create_project_page():
     if 'id' not in session:
         return redirect ('/')
     else:
-        return render_template('/create_project.html')
+        user = User.get_one_user({'id':session['id']})
+        return render_template('/create_project.html', user = user)
 
 @app.route('/edit_project/<int:project_id>')
 def edit_project(project_id):
     if 'id' not in session:
         return redirect('/')
     else:
+        user = User.get_one_user({'id':session['id']})
         id = project_id 
         project = Project.get_project_by_id({'id': id})
         parts = Part.get_parts_by_project_id({'project_id': project_id})
-        print(project_id)
-        return render_template('edit_project.html', project=project, parts=parts)
+        return render_template('edit_project.html', project=project, parts=parts, user=user)
 
 @app.route('/create_profile')
 def show_edit_profile_page():
@@ -68,10 +69,19 @@ def show_depot_page():
     else:
         user = User.get_one_user({'id':session['id']})
         projects = Project.get_users_and_projects()
-        print(projects)
         return render_template('/depot_page.html', projects=projects, user=user)
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
+
+@app.route('/view_project/<int:id>')
+def view_project_page(id):
+    if 'id' not in session:
+        return redirect ('/')
+    else:
+        parts = Part.get_parts_by_project_id({'project_id': id})
+        project = Project.get_project_by_id({'id': id})
+        user = User.get_one_user({'id':session['id']})
+        return render_template('/view_project.html', user=user, project=project, parts=parts)

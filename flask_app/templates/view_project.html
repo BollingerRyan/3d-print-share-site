@@ -4,26 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='view_project.css') }}">
     <title>view Project</title>
 </head>
 <body>
     <div id="header">
-        <h3>Welcome {{user.username}}</h3>
-        <a href="/profile">Profile</a>
+        <h3 class="username">Welcome {{user.username}}</h3>
+        <a href="/profile_page">Profile</a>
         <a href="/depot">Depot</a>
         <a href="/logout">Logout</a>
     </div>
-    <table>
-        <th>Part Name</th>
-        <th>Part description</th>
-        <th>actions</th>
+    <div>
+        <h3 class="projectname"> Name: {{project.project_name}}</h3>
+        <p class="projectdes">Description: {{project.description}}</p>
+    </div>
+    <div>
         {% for part in parts %}
-        <tr>
-            <td>{{ part.part_name }}</td>
-            <td>{{ part.part }}</td>
-            <td><a href="/delete_part/{{part.id}}">Delete</a></td>
-        </tr>
+        <ul class="partlist">
+            <li class="partname">{{part.part_name}}</li>
+            <li class="part"><a href="{{ url_for('static', filename=part.part) }}" data-toggle="tooltip" title=img src="{{ url_for('static', filename=part.part) }}" alt="{{part.part_name}}">{{part.part}}</a></li>
+            <li class="part">{{part.created_at.strftime('%m/%d/%Y')}}</li>
+        </ul>
         {% endfor %}
-    </table>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip({
+            html:true
+            });
+        });
+    </script>
 </body>
 </html>

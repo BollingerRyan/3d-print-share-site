@@ -38,6 +38,19 @@ class Profile:
             return None
         
     @classmethod
+    def get_users_profile_from_project_id(cls, project_id):
+        query = '''
+        SELECT * FROM projects
+        WHERE project.id = %(project_id)s
+        '''
+        results = connectToMySQL(db).query_db(query, project_id)
+        print(f"results: {results}")
+        if results:
+            return cls(results[0])
+        else:
+            return None
+        
+    @classmethod
     def update_users_profile(cls, user_data):
         query = "UPDATE profile SET Full_name = %(Full_name)s, description = %(description)s, Pic = %(Pic)s, updated_at = NOW() WHERE users_id = %(users_id)s;"
         return connectToMySQL(db).query_db(query, user_data)

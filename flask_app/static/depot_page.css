@@ -49,12 +49,13 @@ p {
 
 form {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
 }
 
-select, input[type="search"], input[type="submit"] {
+select, input[type="submit"] {
     border: none;
+    margin-right: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-size: 16px;

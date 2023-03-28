@@ -76,12 +76,15 @@ def logout():
     session.clear()
     return redirect('/')
 
-@app.route('/view_project/<int:id>')
-def view_project_page(id):
+@app.route('/view_project/<int:project_id>')
+def view_project_page(project_id):
     if 'id' not in session:
         return redirect ('/')
     else:
-        parts = Part.get_parts_by_project_id({'project_id': id})
-        project = Project.get_project_by_id({'id': id})
+        print(project_id)
+        project = Project.get_project_by_id({'id':project_id})
+        parts = Part.get_parts_by_project_id({'project_id': project_id})
+        print(parts)
+        print(project)
         user = User.get_one_user({'id':session['id']})
         return render_template('/view_project.html', user=user, project=project, parts=parts)

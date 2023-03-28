@@ -41,6 +41,7 @@ class Project:
             return False
         return cls(result[0])
     
+    
     @classmethod
     def get_project_by_part_project_id(cls, id):
         query = "SELECT * FROM projects WHERE id = %(id)s;"

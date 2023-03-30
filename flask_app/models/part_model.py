@@ -7,6 +7,7 @@ class Part:
         self.id = data['id']
         self.part = data['part']
         self.part_name = data ['part_name']
+        self.screenshot = data ['screenshot']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.project_id = data['project_id']
@@ -15,8 +16,8 @@ class Part:
     def create_part(cls, data):
         query = '''
         INSERT INTO parts
-        (part, part_name, created_at, updated_at, project_id)
-        VALUES (%(part)s, %(part_name)s, NOW(), NOW(), %(project_id)s)
+        (part, part_name, screenshot, created_at, updated_at, project_id)
+        VALUES (%(part)s, %(part_name)s, %(screenshot)s, NOW(), NOW(), %(project_id)s)
         '''
         result = connectToMySQL(db).query_db(query, data)
         data['id'] = result

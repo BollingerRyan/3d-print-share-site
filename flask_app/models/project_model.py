@@ -53,12 +53,26 @@ class Project:
     @classmethod
     def get_users_and_projects(cls):
         query = '''
-        SELECT * FROM users
-        LEFT JOIN projects
-        ON users.id = projects.users_id
+        SELECT users.*, projects.*, COUNT(projects_has_likes.projects_id) AS num_likes
+        FROM users
+        LEFT JOIN projects ON users.id = projects.users_id
+        LEFT JOIN projects_has_likes ON projects.id = projects_has_likes.projects_id
+        GROUP BY projects.id
         ORDER BY projects.created_at DESC;
         '''
         return connectToMySQL(db).query_db(query)
+
+    @classmethod
+    def get_users_projects_and_likes(cls):
+        query = '''
+        SELECT users.*, projects.*, COUNT(projects_has_likes.projects_id) AS num_likes
+        FROM users
+        LEFT JOIN projects ON users.id = projects.users_id
+        LEFT JOIN projects_has_likes ON projects.id = projects_has_likes.projects_id
+        GROUP BY projects.id
+        ORDER BY projects_has_likes.projects_id DESC;
+        '''
+        return connectToMySQL(db).query_db(query)   
 
     @classmethod
     def delete_project(cls, project_id):

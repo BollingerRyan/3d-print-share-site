@@ -11,21 +11,27 @@ app.config['UPLOAD_FOLDER'] = os.path.abspath(os.path.join(os.path.dirname(__fil
 
 @app.route('/Upload_part/<int:project_id>', methods=['POST'])
 def upload_part(project_id):
-    print('### this is the one thats important ###',project_id)
     if 'id' not in session:
         return redirect('/')
     else:
-        file = request.files['part']
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
+        partfile = request.files['part']
+        part_filename = secure_filename(partfile.filename)
+        partfile_path = os.path.join(app.config['UPLOAD_FOLDER'], part_filename)
+        partfile.save(partfile_path)
+        
+        partpic = request.files['screenshot']
+        partpic_filename = secure_filename(partpic.filename)
+        partpic_path = os.path.join(app.config['UPLOAD_FOLDER'], partpic_filename)
+        partpic.save(partpic_path)
+        
         data = {
-            'part': f'uploads/{filename}',
+            'part': f'uploads/{part_filename}',
             'part_name': request.form['part_name'],
+            'screenshot' : f'uploads/{partpic_filename}',
             'project_id': project_id
         }
         Part.create_part(data)
-        flash('Part uploaded successfully!', 'success')
+        flash('Part uploaded successfully!', 'part')
         return redirect(f'/edit_project/{project_id}')
 
 @app.route('/delete_part/<int:part_id>')

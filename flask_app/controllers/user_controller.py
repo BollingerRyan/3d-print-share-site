@@ -1,4 +1,5 @@
 from flask_bcrypt import Bcrypt
+from flask_app.models.like_model import Like
 from flask_app.controllers import navigation
 from flask_app.models.user_model import User
 from flask_app import app

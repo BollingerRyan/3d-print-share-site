@@ -30,6 +30,8 @@
         <input type="text" name="part_name" id="part_name" required>
         <label for="part">Part File:</label>
         <input type="file" name="part" id="part_file" accept=".stl" required>
+        <label for="partpic">Picture or screenshot of part:</label>
+        <input type="file" name="screenshot" accept=".png,.jpg">
         <input type="submit" value="submit">
     </form>
     <table class="table">
@@ -37,6 +39,7 @@
             <tr>
                 <th scope="col">Part Name</th>
                 <th scope="col">File Name</th>
+                <th scope="col">Picture</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
@@ -45,6 +48,7 @@
             <tr>
                 <td>{{ part.part_name }}</td>
                 <td>{{ part.part }}</td>
+                <td><img class ="partpic"src="{{ url_for('static', filename=part.screenshot) }}" alt="profile pic cant be displayed"></td>
                 <td><a href="/delete_part/{{part.id}}">Delete</a></td>
             </tr>
             {% endfor %}

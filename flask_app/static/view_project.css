@@ -40,6 +40,14 @@ body {
     margin: 10px;
     width: 80%;
 }
+.likes{
+    margin: 10px;
+    width: 80%;
+}
+.likelink{
+    margin: 10px;
+    width: 80%;
+}
 h3 {
     font-size: 36px;
     margin-bottom: 20px;
@@ -50,14 +58,17 @@ p {
     margin-bottom: 50px;
 }
 .partlist{
-    width: max-content;
+
+    width: 450px;
     margin: 10px;
     border: 2px solid grey;
 }
 .partname{
     text-decoration: underline;
 }
-
+.partpic{
+    height: 80px;
+}
 
 ul {
     list-style: square;

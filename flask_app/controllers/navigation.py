@@ -1,4 +1,5 @@
 from flask import render_template,redirect,request,session,flash
+from flask_app.models.like_model import Like
 from flask_app.models.user_model import User
 from flask_app.models.part_model import Part
 from flask_app.models.profile_model import Profile
@@ -71,6 +72,16 @@ def show_depot_page():
         projects = Project.get_users_and_projects()
         return render_template('/depot_page.html', projects=projects, user=user)
 
+@app.route('/depot_by_likes')
+def show_depot_page_by_likes():
+    if 'id' not in session:
+        return redirect ('/')
+    else:
+        user = User.get_one_user({'id':session['id']})
+        projects = Project.get_users_projects_and_likes()
+        print(projects)
+        return render_template('/depot_page.html', projects=projects, user=user)
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -81,10 +92,22 @@ def view_project_page(project_id):
     if 'id' not in session:
         return redirect ('/')
     else:
-        print(project_id)
+        data = {
+            'projects_id':project_id,
+            'users_id': session['id']
+        }
         project = Project.get_project_by_id({'id':project_id})
         parts = Part.get_parts_by_project_id({'project_id': project_id})
-        print(parts)
-        print(project)
         user = User.get_one_user({'id':session['id']})
-        return render_template('/view_project.html', user=user, project=project, parts=parts)
+        likes = Like.count_likes(project.id)
+        has_liked = Like.has_liked(data)
+        return render_template('/view_project.html', user=user, project=project, parts=parts, likes=likes, has_liked = has_liked, project_id=project_id)
+    
+
+@app.route('/search')
+def search():
+    sort = request.args.get('sort_by')
+    if sort == 'recent':
+        return redirect('/depot')
+    else:
+        return redirect('/depot_by_likes')

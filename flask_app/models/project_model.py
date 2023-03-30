@@ -69,7 +69,6 @@ class Project:
         FROM users
         LEFT JOIN projects ON users.id = projects.users_id
         LEFT JOIN projects_has_likes ON projects.id = projects_has_likes.projects_id
-        GROUP BY projects.id
         ORDER BY projects_has_likes.projects_id DESC;
         '''
         return connectToMySQL(db).query_db(query)   

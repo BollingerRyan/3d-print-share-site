@@ -70,6 +70,7 @@ def show_depot_page():
     else:
         user = User.get_one_user({'id':session['id']})
         projects = Project.get_users_and_projects()
+        print(projects)
         return render_template('/depot_page.html', projects=projects, user=user)
 
 @app.route('/depot_by_likes')

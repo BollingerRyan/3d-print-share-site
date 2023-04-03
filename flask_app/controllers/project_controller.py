@@ -5,7 +5,7 @@ from flask_app.models.part_model import Part
 
 @app.route('/create_project', methods=["POST"])
 def create_project():
-    if not Project.validations:
+    if not Project.validations():
         return redirect('/create_project')
     else:
         data = {
@@ -25,4 +25,6 @@ def delete_project(project_id):
         Project.delete_project({ 'project_id': project_id })
         flash('Project has been deleted!''project')
         return redirect('/profile_page')
+    
+
 

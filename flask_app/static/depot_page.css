@@ -47,6 +47,13 @@ p {
     margin: 0 0 20px;
 }
 
+tr{
+    width: 150px;
+}
+.img{
+    height: 50px;
+}
+
 form {
     display: flex;
     justify-content: start;

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8284760783766658"
+    crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +35,7 @@
                     <th scope="col">Project Name</th>
                     <th scope="col">User Name</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Pic</th>
                     <th scope="col">Likes</th>
                     <th scope="col">Upload Date</th>
                     <th scope="col">Actions</th>
@@ -45,6 +48,7 @@
                         <td>{{ project.project_name}}</td>
                         <td>{{ project.username }}</td>
                         <td>{{ project.description }}</td>
+                        <td><img class="img" src="static/{{ project.screenshot }}" alt="nothing to display">
                         <td>{{ project.num_likes }}</td>
                         <td>{{ project.created_at.strftime('%m/%d/%Y') }}</td>
                         <td>

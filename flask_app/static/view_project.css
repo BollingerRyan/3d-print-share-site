@@ -68,6 +68,11 @@ p {
 }
 .partpic{
     height: 80px;
+    transition: transform .2s;
+}
+
+.partpic:hover{
+    transform: translateX(250px) scale(5);
 }
 
 ul {

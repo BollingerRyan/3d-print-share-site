@@ -67,14 +67,22 @@ class Project:
     @classmethod
     def get_users_projects_and_likes(cls):
         query = '''
-        SELECT users.username, projects.*, COUNT(projects_has_likes.projects_id) AS num_likes
+        SELECT users.username, projects.*, parts.screenshot, COUNT(projects_has_likes.projects_id) AS num_likes
         FROM users
         LEFT JOIN projects ON users.id = projects.users_id
+        LEFT JOIN parts ON parts.project_id = projects.id
         LEFT JOIN projects_has_likes ON projects.id = projects_has_likes.projects_id
-        GROUP BY users.id, projects.id
+        GROUP BY users.id, projects.id, parts.id
         ORDER BY num_likes DESC;
         '''
-        return connectToMySQL(db).query_db(query)   
+        return connectToMySQL(db).query_db(query)
+
+    @classmethod
+    def get_part_pics(cls):
+        query = '''
+        SELECT * FROM parts;
+        '''
+        return connectToMySQL(db).query_db(query)
 
     @classmethod
     def delete_project(cls, project_id):

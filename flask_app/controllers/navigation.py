@@ -80,6 +80,8 @@ def show_depot_page_by_likes():
     else:
         user = User.get_one_user({'id':session['id']})
         projects = Project.get_users_projects_and_likes()
+        pics = Project.get_part_pics()
+        print(pics)
         print(projects)
         return render_template('/depot_page.html', projects=projects, user=user)
 
